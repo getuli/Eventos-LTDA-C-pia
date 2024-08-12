@@ -98,11 +98,26 @@ class EventosController extends Controller
         eventos::FindOrFail($request->id)->update($dados);
         return view('welcome',['banco'=>$banco]);
     }
-    public function destroy($id){
-       eventos::FindOrFail($id)->delete();
-       $banco  = eventos::all();
-       return view('/welcome',['banco'=>$banco]);
+    public function destroy($id)
+    {
+        $evento = eventos::findOrFail($id);
+    
+        // Verifica se existe uma imagem associada ao evento
+        if ($evento->image) {
+            $imagePath = public_path('images/' . $evento->image);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+    
+        $evento->delete();
+    
+        // Se quiser retornar uma resposta JSON, use:
+        // return response()->json(['message' => 'Evento deletado com sucesso'], 200);
+    
+        return redirect('/');
     }
+    
     public function join($id){
         $user = auth()->user();
         $user->eventosAsParticipant()->attach($id);
