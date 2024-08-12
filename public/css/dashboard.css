@@ -1,0 +1,50 @@
+/* Estilos básicos */
+table {
+    
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    font-family:'Roboto';
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    
+}
+a{
+    text-decoration: none;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Estilos adicionales (opcional) */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    font-family:'Roboto'
+}
+
+button{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+button:hover {
+    background-color: #3e8e41; /* Verde mais escuro ao passar o mouse */
+}
