@@ -84,9 +84,10 @@ class EventosController extends Controller
         };
         return view('edit',['banco'=>$banco]);
     }
-    public function update(Request $request){
-
+    public function update(Request $request)
+    {
         $dados = $request->all();
+    
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $requestImage = $request->file('image');
             $extension = $requestImage->extension();
@@ -94,10 +95,13 @@ class EventosController extends Controller
             $requestImage->move(public_path('images'), $imageName);
             $dados['image'] = $imageName;
         }
-        $banco = eventos::all();
-        eventos::FindOrFail($request->id)->update($dados);
-        return view('welcome',['banco'=>$banco]);
+    
+        $evento = eventos::findOrFail($request->id);
+        $evento->update($dados);
+    
+        return redirect()->back(); // ou outra rota desejada
     }
+    
     public function destroy($id)
     {
         $evento = eventos::findOrFail($id);
